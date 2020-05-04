@@ -56,7 +56,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Doctor Management</title>
 
 <link rel="stylesheet" href="Views/css/bootstrap.min.css">
 <script src="Components/jquery-3.5.0.min.js"></script>
@@ -68,11 +68,14 @@
 <div class="container">
 <div class="row">
 <div class="col-6">
-	<h1>Doctor Management</h1>
+	<h1>Doctor Management..</h1>
 	
 	<form id="formDoctor" name="formDoctor">
 		
-		First Name:
+		Doctor ID:
+		<input id="doctorId" name="doctorId" type="text" class="form-control form-control-sm">
+		
+		<br>First Name:
 		<input id="firstName" name="firstName" type="text" class="form-control form-control-sm">
 		
 		<br> Last Name:
