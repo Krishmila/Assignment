@@ -1,6 +1,7 @@
 <%@page import= "com.caremarque.doctor.service.DoctorServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
     <%--   
     <%
   //Save---------------------------------
@@ -51,7 +52,6 @@
     
     %> 
     --%>
-    
 <!DOCTYPE html>
 <html>
 <head>

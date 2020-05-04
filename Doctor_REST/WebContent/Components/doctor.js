@@ -79,6 +79,50 @@ function onDoctorSaveComplete(response, status)
 	$("#formDoctor")[0].reset();
 }
 
+$(document).on("click", ".btnRemove", function(event)
+		{
+		$.ajax(
+		{
+		url : "DoctorAPI",
+		type : "DELETE",
+		data : "doctorID=" + $(this).data("doctorid"),
+		dataType : "text",
+		complete : function(response, status)
+		{
+			onDoctorDeleteComplete(response.responseText, status);
+		}
+		});
+	});
+
+function onDoctorDeleteComplete(response, status){
+	
+	if (status == "success")
+	{
+		var resultSet = JSON.parse(response);
+		
+		if (resultSet.status.trim() == "success")
+		{
+			$("#alertSuccess").text("Successfully deleted.");
+			$("#alertSuccess").show();
+			
+			$("#divDoctorsGrid").html(resultSet.data);
+		} else if (resultSet.status.trim() == "error")
+		{
+			$("#alertError").text(resultSet.data);
+			$("#alertError").show();
+		}
+		
+	} else if (status == "error")
+	{
+		$("#alertError").text("Error while deleting.");
+		$("#alertError").show();
+	} else
+	{
+		
+		$("#alertError").text("Unknown error while deleting..");
+		$("#alertError").show();
+	}
+}
 // UPDATE==========================================
 $(document).on("click", ".btnUpdate", function(event)
 {
@@ -101,62 +145,63 @@ $(document).on("click", ".btnUpdate", function(event)
 // CLIENTMODEL=========================================================================
 function validateDoctorForm()
 {
-// CODE
-if ($("#firstName").val().trim() == "")
-{
-return "Insert First Name.";
-}
-// NAME
-if ($("#lastName").val().trim() == "")
-{
-return "Insert Last Name.";
-}
-//PRICE-------------------------------
-if ($("#regNo").val().trim() == "")
-{
-return "Insert Registration Number.";
-}
-//NAME
-if ($("#gender").val().trim() == "")
-{
-return "Insert Gender.";
-}
-//NAME
-if ($("#specialization").val().trim() == "")
-{
-return "Insert Specialization.";
-}
-//NAME
-if ($("#phone").val().trim() == "")
-{
-return "Insert Phone Number.";
-}
-//NAME
-if ($("#email").val().trim() == "")
-{
-return "Insert Email Address.";
-}
-//NAME
-if ($("#doctorCharges").val().trim() == "")
-{
-return "Insert Doctor Charges.";
-}
-// is numerical value
-var tmpCharges = $("#doctorCharges").val().trim();
-if (!$.isNumeric(tmpCharges))
-{
-return "Insert a numerical value for Item Price.";
-}
-// convert to decimal price
-$("#doctorCharges").val(parseFloat(tmpCharges).toFixed(2));
-// DESCRIPTION------------------------
-if ($("#password").val().trim() == "")
-{
-return "Insert Password.";
-}
-if ($("#confirmPassword").val().trim() == "")
-{
-return "Insert to Confirm Password.";
-}
+	// FIRSTNAME
+	if ($("#firstName").val().trim() == "")
+	{
+		return "Insert First Name.";
+	}
+	// LASTNAME
+	if ($("#lastName").val().trim() == "")
+	{
+		return "Insert Last Name.";
+	}
+	//REGISTRATION NUMBER-------------------------------
+	if ($("#regNo").val().trim() == "")
+	{
+		return "Insert Registration Number.";
+	}
+	//GENDER
+	if ($("#gender").val().trim() == "")
+	{
+		return "Insert Gender.";
+	}
+	//SPECIALIZATION
+	if ($("#specialization").val().trim() == "")
+	{
+		return "Insert Specialization.";
+	}
+	//PHONE
+	if ($("#phone").val().trim() == "")
+	{
+		return "Insert Phone Number.";
+	}
+	//EMAIL
+	if ($("#email").val().trim() == "")
+	{
+		return "Insert Email Address.";
+	}
+	//DOCTOR CHARGES
+	if ($("#doctorCharges").val().trim() == "")
+	{
+		return "Insert Doctor Charges.";
+	}
+	// is numerical value
+	var tmpCharges = $("#doctorCharges").val().trim();
+	if (!$.isNumeric(tmpCharges))
+	{
+		return "Insert a numerical value for Doctor Charges.";
+	}
+	// convert to decimal price
+	$("#doctorCharges").val(parseFloat(tmpCharges).toFixed(2));
+	// PASSWORD
+	if ($("#password").val().trim() == "")
+	{
+		return "Insert Password.";
+	}
+	//CONFIRM PASSWORD
+	if ($("#confirmPassword").val().trim() == "")
+	{
+		return "Insert to Confirm Password.";
+	}
 return true;
 }
