@@ -52,19 +52,8 @@ public class DoctorServiceImpl implements IDoctorService {
 					
 					con = DBConnection.getDBConnection();
 					
-					String query = "INSERT INTO doctor("
-								+"doctorId,"
-								+"firstName,"
-								+"lastName,"
-								+"regNo,"
-								+"gender,"
-								+"specialization,"
-								+"phone,"
-								+"email,"
-								+"doctorCharges,"
-								+"password,"
-								+"confirmPassword)"
-								+"VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+					String query = "INSERT INTO doctor('doctorId','firstName','lastName','regNo','gender','specialization','phone','email,'doctorCharges','password,'confirmPassword')"
+							+"VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 					
 					preparedStatement = con.prepareStatement(query);
 					
@@ -83,7 +72,7 @@ public class DoctorServiceImpl implements IDoctorService {
 					
 					//validation for fields
 					
-					if(!doctor.getPassword().equals(doctor.getConfirmPassword())) {
+					/*if(!doctor.getPassword().equals(doctor.getConfirmPassword())) {
 						output="Password Mismatching";
 						
 					}else {
@@ -96,6 +85,7 @@ public class DoctorServiceImpl implements IDoctorService {
 							
 							  }
 						}
+						*/
 					
 					
 					//new code
@@ -137,7 +127,7 @@ public class DoctorServiceImpl implements IDoctorService {
 
 		
 		//..........implementation of getDoctor method...........
-		
+		/*
 		@Override
 		public String getDoctor(String doctorId) {
 			// TODO Auto-generated method stub
@@ -233,7 +223,7 @@ public class DoctorServiceImpl implements IDoctorService {
 			return output;
 		}
 	
-		
+		*/
 		
 		//implementation of getDoctors method
 		
@@ -265,7 +255,7 @@ public class DoctorServiceImpl implements IDoctorService {
 						+"<th>email</th>"
 						+"<th>doctorCharges</th>"
 						+"<th>password</th>"
-						+"<th>confirmPassword</th></tr>"
+						+"<th>confirmPassword</th>"
 						+"<th>Update</th>"+"<th>Remove</th></tr>";
 				
 				while(rs.next()) {
@@ -293,7 +283,7 @@ public class DoctorServiceImpl implements IDoctorService {
 					output += "<td>" + email + "</td>";
 					output += "<td>" + doctorCharges + "</td>";
 					output += "<td>" + password + "</td>";
-					output += "<td>" + confirmPassword + "</td></tr>";
+					output += "<td>" + confirmPassword + "</td>";
 					
 					output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
 							+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger'data-doctorid='"
@@ -543,7 +533,7 @@ public class DoctorServiceImpl implements IDoctorService {
 	
 		//This method is to take the number of appointments of the relevant doctor
 		
-		@Override
+	/*	@Override
 		public String getAllAppointments(String doctorId) {
 			// TODO Auto-generated method stub
 	
@@ -620,7 +610,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		
 	
 		//to validate login
-	/*
+	
 		@Override
 		public String login(Doctor doctor) {
 			

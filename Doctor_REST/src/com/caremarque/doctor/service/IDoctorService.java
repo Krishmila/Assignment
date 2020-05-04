@@ -13,7 +13,7 @@ public interface IDoctorService {
 	public ArrayList<String> getDoctorIDs();
 
 	//this method is to create doctor
-	public String getDoctor(String doctorId);
+	//public String getDoctor(String doctorId);
 
 	//this method is to create doctor
 	public String getDoctors();
@@ -26,7 +26,7 @@ public interface IDoctorService {
 	public String updateDoctor(String doctorId,String firstName,String lastName,String regNo,String gender,String specialization,String phone,String email,double doctorCharges,String password,String confirmPassword);
 	
 	//to get number of appointments
-	public String getAllAppointments(String doctorId); 
+	//public String getAllAppointments(String doctorId); 
 	
 	//public String login(Doctor doctor);
 }
