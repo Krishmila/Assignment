@@ -12,7 +12,7 @@ public class Doctor
 	private String specialization;
 	private String phone;
 	private String email;
-	private double doctorCharges;
+	private int doctorCharges;
 	private String password;
 	private String confirmPassword;
 	private String type;
@@ -86,11 +86,11 @@ public class Doctor
 		this.email = email;
 	}
 
-	public double getDoctorCharges() {
+	public int getDoctorCharges() {
 		return doctorCharges;
 	}
 
-	public void setDoctorCharges(double doctorCharges) {
+	public void setDoctorCharges(int doctorCharges) {
 		this.doctorCharges = doctorCharges;
 	}
 

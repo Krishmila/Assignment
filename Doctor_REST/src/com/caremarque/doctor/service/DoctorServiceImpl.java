@@ -45,30 +45,44 @@ public class DoctorServiceImpl implements IDoctorService {
 			
 			// Here we call the generatePatientIDs method to auto generate a patientId
 			
-			String doctorId = CommonUtils.generateDoctorIDs(getDoctorIDs());
-			System.out.println("DoctorID: " +  doctorId);
+			//String doctorId = CommonUtils.generateDoctorIDs(getDoctorIDs());
+			System.out.println("Doctor Charges: " +  doctor.getDoctorCharges());
+			
 		
 				try {
 					
 					con = DBConnection.getDBConnection();
 					
-					String query = "INSERT INTO doctor('doctorId','firstName','lastName','regNo','gender','specialization','phone','email,'doctorCharges','password,'confirmPassword')"
+					/*String query = "INSERT INTO doctor('doctorId','firstName','lastName','regNo','gender','specialization','phone','email','doctorCharges','password','confirmPassword')"
+							+"VALUES(?,?,?,?,?,?,?,?,?,?,?)";*/
+					String query = "INSERT INTO doctor("
+							+"doctorId,"
+							+"firstName,"
+							+"lastName,"
+							+"regNo,"
+							+"gender,"
+							+"specialization,"
+							+"phone,"
+							+"email,"
+							+"doctorCharges,"
+							+"password,"
+							+"confirmPassword)"
 							+"VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 					
 					preparedStatement = con.prepareStatement(query);
 					
-					doctor.setDoctorId(doctorId);
-					preparedStatement.setString(1, doctor.getDoctorId());
-					preparedStatement.setString(2, doctor.getFirstName());
-					preparedStatement.setString(3, doctor.getLastName());
-					preparedStatement.setString(4, doctor.getRegNo());
-					preparedStatement.setString(5, doctor.getGender());
-					preparedStatement.setString(6, doctor.getSpecialization());
-					preparedStatement.setString(7, doctor.getPhone());
-					preparedStatement.setString(8, doctor.getEmail());
-					preparedStatement.setDouble(9, doctor.getDoctorCharges());
-					preparedStatement.setString(10, doctor.getPassword());
-					preparedStatement.setString(11, doctor.getConfirmPassword());
+					//doctor.setDoctorId(doctorId);
+					preparedStatement.setString(Constants.COLUMN_INDEX_ONE, doctor.getDoctorId());
+					preparedStatement.setString(Constants.COLUMN_INDEX_TWO, doctor.getFirstName());
+					preparedStatement.setString(Constants.COLUMN_INDEX_THREE, doctor.getLastName());
+					preparedStatement.setString(Constants.COLUMN_INDEX_FOUR, doctor.getRegNo());
+					preparedStatement.setString(Constants.COLUMN_INDEX_FIVE, doctor.getGender());
+					preparedStatement.setString(Constants.COLUMN_INDEX_SIX, doctor.getSpecialization());
+					preparedStatement.setString(Constants.COLUMN_INDEX_SEVEN, doctor.getPhone());
+					preparedStatement.setString(Constants.COLUMN_INDEX_EIGHT, doctor.getEmail());
+					preparedStatement.setInt(Constants.COLUMN_INDEX_NINE, doctor.getDoctorCharges());
+					preparedStatement.setString(Constants.COLUMN_INDEX_TEN, doctor.getPassword());
+					preparedStatement.setString(Constants.COLUMN_INDEX_ELEVEN, doctor.getConfirmPassword());
 					
 					//validation for fields
 					
@@ -89,10 +103,11 @@ public class DoctorServiceImpl implements IDoctorService {
 					
 					
 					//new code
+					preparedStatement.executeUpdate();
+					//output = "Inserted Successfully...!";
 					String newDoctor = getDoctors();
-					output = "{\"status\":\"success\", \"data\": \"" +
-							newDoctor + "\"}";
-					
+					output = "{\"status\":\"success\", \"data\": \"" + newDoctor + "\"}";
+					System.out.println("inside data base");
 				
 				 }catch (Exception e) {
 					
@@ -268,11 +283,12 @@ public class DoctorServiceImpl implements IDoctorService {
 					String specialization = rs.getString("specialization");
 					String phone = rs.getString("phone");
 					String email = rs.getString("email");
-					double doctorCharges = rs.getDouble("doctorCharges");
+					int doctorCharges = rs.getInt("doctorCharges");
 					String password = rs.getString("password");
 					String confirmPassword = rs.getString("confirmPassword");
+					//type='hidden'
 					
-					output += "<tr><td><input id='hidDoctorIDUpdate' name='hidDoctorIDUpdate' type='hidden' value='"+ doctorId 
+					output += "<tr><td><input id='hidDoctorIDUpdate' name='hidDoctorIDUpdate'  value='"+ doctorId 
 								+"'>"+ "</td>";
 					output += "<td>" + firstName + "</td>";
 					output += "<td>" + lastName + "</td>";
@@ -328,7 +344,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		
 		@Override
 		//public String updateDoctor(String doctorId,Doctor doctor) {
-			public String updateDoctor(String doctorId,String firstName,String lastName,String regNo,String gender,String specialization,String phone,String email,double doctorCharges,String password,String confirmPassword) {
+			public String updateDoctor(String doctorId,String firstName,String lastName,String regNo,String gender,String specialization,String phone,String email,int doctorCharges,String password,String confirmPassword) {
 			
 			String output = "";
 			Connection con = null;
@@ -349,7 +365,7 @@ public class DoctorServiceImpl implements IDoctorService {
 				preparedStatement.setString(Constants.COLUMN_INDEX_SIX, specialization);
 				preparedStatement.setString(Constants.COLUMN_INDEX_SEVEN, phone);
 				preparedStatement.setString(Constants.COLUMN_INDEX_EIGHT, email);
-				preparedStatement.setDouble(Constants.COLUMN_INDEX_NINE, doctorCharges);
+				preparedStatement.setInt(Constants.COLUMN_INDEX_NINE, doctorCharges);
 				preparedStatement.setString(Constants.COLUMN_INDEX_TEN, password);
 				preparedStatement.setString(Constants.COLUMN_INDEX_ELEVEN, confirmPassword);
 				preparedStatement.setString(Constants.COLUMN_INDEX_TWELVE, doctorId);
@@ -398,6 +414,7 @@ public class DoctorServiceImpl implements IDoctorService {
 							
 							output = "{\"status\":\"error\", \"data\": \"Error while updating doctor details.\"}";
 							System.out.println(e.getMessage());
+							log.log(Level.SEVERE, e.getMessage());
 			}finally {
 				
 					try {
@@ -438,12 +455,13 @@ public class DoctorServiceImpl implements IDoctorService {
 				
 				preparedStatmnt = con.prepareStatement(query);
 				
-				preparedStatmnt.setString(1, doctorId);
-				
+				preparedStatmnt.setString(Constants.COLUMN_INDEX_ONE, doctorId);
+				System.out.println("inside delete"+doctorId);
 				preparedStatmnt.execute();
 				
 					//output = "Deleted successfully..!";
-				
+				String newDoctor = getDoctors();
+				output = "{\"status\":\"success\", \"data\": \"" + newDoctor + "\"}";
 
 			}catch(Exception e) {
 				

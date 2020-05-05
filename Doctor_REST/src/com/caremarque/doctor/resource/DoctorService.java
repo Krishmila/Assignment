@@ -99,7 +99,7 @@ import com.google.gson.JsonParser;
 					return ab.getDoctors();
 				}
 				 
-				//getDoctor method
+				/*getDoctor method
 				@GET
 				@Path("/getdoctor/{doctorId}")
 				@Produces(MediaType.TEXT_HTML)
@@ -146,8 +146,8 @@ import com.google.gson.JsonParser;
 					doctor.setPassword(password);
 					doctor.setConfirmPassword(confirmPassword);
 					
-					String output = ab.updateDoctor(doctorId,doctor);
-					
+					//String output = ab.updateDoctor(doctorId,doctor);
+					String output = ab.updateDoctor(doctorId,firstName,lastName,regNo,gender,specialization,phone,email,doctorCharges,password,confirmPassword);
 					return output;
 				}
 				
@@ -169,7 +169,7 @@ import com.google.gson.JsonParser;
 					
 				}
 				
-			
+				/*
 				//getAllAppointments method
 				@GET
 				@Path("/appoint")
@@ -206,5 +206,5 @@ import com.google.gson.JsonParser;
 					return output;
 				}
 				
-				}		
- */
+				}	*/
+ 

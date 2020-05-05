@@ -23,7 +23,7 @@ public interface IDoctorService {
 
 	//this method is to create doctor
 	//public String updateDoctor(String doctorId, Doctor doctor);
-	public String updateDoctor(String doctorId,String firstName,String lastName,String regNo,String gender,String specialization,String phone,String email,double doctorCharges,String password,String confirmPassword);
+	public String updateDoctor(String doctorId,String firstName,String lastName,String regNo,String gender,String specialization,String phone,String email,int doctorCharges,String password,String confirmPassword);
 	
 	//to get number of appointments
 	//public String getAllAppointments(String doctorId); 
