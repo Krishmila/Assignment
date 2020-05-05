@@ -33,19 +33,24 @@ $(document).on("click", "#btnSave", function(event)
 		//$("#formDoctor").submit();
 		
 		//If valid
-		var type = ($("hideDoctorIdSave").val() == "") ? "POST" : "PUT";
+		var check=$("#Save").val() == "";
+		var type = (check) ? "POST" : "PUT";
+		//var type = ($("#hidDoctorIdSave").val() == "") ? "POST" : "PUT";
 		
 		$.ajax(
 		{
 			url : "DoctorAPI",
 			type : type,
-			data : $("formDoctor").serialize(),
+			data : $("#formDoctor").serialize(),
 			dataType : "text",
 			complete : function(response, status)
 			{
 				onDoctorSaveComplete(response.responseText, status);
 			}
 		});
+		$("#hidDoctorIDSave").val("");
+		$("#formDoctor")[0].reset();
+		
 });
 
 function onDoctorSaveComplete(response, status)
@@ -75,9 +80,29 @@ function onDoctorSaveComplete(response, status)
 		$("#alertError").text("Unknown error while saving..");
 		$("#alertError").show();
 	}
-	$("#hidDoctorIDSave").val("");
-	$("#formDoctor")[0].reset();
+	
 }
+
+//UPDATE==========================================
+$(document).on("click", ".btnUpdate", function(event)
+{
+		$("#Save").val("PUT");
+		$("#hidDoctorIdSave").val($(this).closest("tr").find('#hidDoctorIDUpdate').val());
+		$("#doctorId").val($(this).closest("tr").find('#hidDoctorIDUpdate').val());
+		//$("#doctorId").val($(this).closest("tr").find('td:eq(0)').text());
+		$("#firstName").val($(this).closest("tr").find('td:eq(1)').text());
+		$("#lastName").val($(this).closest("tr").find('td:eq(2)').text());
+		$("#regNo").val($(this).closest("tr").find('td:eq(3)').text());
+		$("#gender").val($(this).closest("tr").find('td:eq(4)').text());
+		$("#specialization").val($(this).closest("tr").find('td:eq(5)').text());
+		$("#phone").val($(this).closest("tr").find('td:eq(6)').text());
+		$("#email").val($(this).closest("tr").find('td:eq(7)').text());
+		$("#doctorCharges").val($(this).closest("tr").find('td:eq(8)').text());
+		$("#password").val($(this).closest("tr").find('td:eq(9)').text());
+		$("#confirmPassword").val($(this).closest("tr").find('td:eq(10)').text());
+});
+
+
 
 $(document).on("click", ".btnRemove", function(event)
 		{
@@ -123,23 +148,6 @@ function onDoctorDeleteComplete(response, status){
 		$("#alertError").show();
 	}
 }
-// UPDATE==========================================
-$(document).on("click", ".btnUpdate", function(event)
-{
-		$("#hidDoctorIDSave").val($(this).closest("tr").find('#hidDoctorIDUpdate').val());
-		$("#doctorId").val($(this).closest("tr").find('td:eq(0)').text());
-		$("#firstName").val($(this).closest("tr").find('td:eq(1)').text());
-		$("#lastName").val($(this).closest("tr").find('td:eq(2)').text());
-		$("#regNo").val($(this).closest("tr").find('td:eq(3)').text());
-		$("#gender").val($(this).closest("tr").find('td:eq(4)').text());
-		$("#specialization").val($(this).closest("tr").find('td:eq(5)').text());
-		$("#phone").val($(this).closest("tr").find('td:eq(6)').text());
-		$("#email").val($(this).closest("tr").find('td:eq(7)').text());
-		$("#doctorCharges").val($(this).closest("tr").find('td:eq(8)').text());
-		$("#password").val($(this).closest("tr").find('td:eq(9)').text());
-		$("#confirmPassword").val($(this).closest("tr").find('td:eq(10)').text());
-});
-
 
 
 // CLIENTMODEL=========================================================================

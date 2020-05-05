@@ -1,6 +1,7 @@
 package com.caremarque.doctor.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.caremarque.doctor.model.Doctor;
 
@@ -22,8 +23,8 @@ public interface IDoctorService {
 	public String cancelDoctor(String doctorId);
 
 	//this method is to create doctor
-	//public String updateDoctor(String doctorId, Doctor doctor);
-	public String updateDoctor(String doctorId,String firstName,String lastName,String regNo,String gender,String specialization,String phone,String email,int doctorCharges,String password,String confirmPassword);
+	//public String updateDoctor(Map params);
+	public String updateDoctor(String doctorId,String firstName,String lastName,String regNo,String gender,String specialization,String phone,String email,String doctorCharges,String password,String confirmPassword);
 	
 	//to get number of appointments
 	//public String getAllAppointments(String doctorId); 

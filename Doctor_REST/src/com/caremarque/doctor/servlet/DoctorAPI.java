@@ -75,7 +75,7 @@ public class DoctorAPI extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		
 		Doctor doctor = new Doctor();
 		DoctorServiceImpl ob=new DoctorServiceImpl();
 		String doctorId = CommonUtils.generateDoctorIDs(ob.getDoctorIDs());
@@ -92,7 +92,7 @@ public class DoctorAPI extends HttpServlet {
 		doctor.setEmail(request.getParameter("email"));
 		System.out.println("Check charges"+request.getParameter("doctorCharges"));
 		try {
-		doctor.setDoctorCharges(Integer.parseInt(request.getParameter("doctorCharges")));
+		doctor.setDoctorCharges(Double.parseDouble(request.getParameter("doctorCharges")));
 		}catch(NumberFormatException e) {System.out.println(e);}
 		doctor.setPassword(request.getParameter("password"));
 		doctor.setConfirmPassword(request.getParameter("confirmPassword"));
@@ -115,10 +115,10 @@ public class DoctorAPI extends HttpServlet {
 		/*System.out.println("Doctor API put method");
 		System.out.println("doctor id: " + paras.get("hideDoctorIdSave").toString());
 		System.out.println("paymeint name: " + paras.get("firstName").toString()); */
-		DoctorServiceImpl ob=new DoctorServiceImpl();
-		String doctorId = CommonUtils.generateDoctorIDs(ob.getDoctorIDs());
-		System.out.println("Doctor Chargers: " +  paras.get("doctorCharges"));
-		
+		//DoctorServiceImpl ob=new DoctorServiceImpl();
+		//String doctorId = CommonUtils.generateDoctorIDs(ob.getDoctorIDs());
+		//System.out.println("Doctor Chargers: " +  paras.get("doctorCharges"));
+		try {
 		String output = doctorServiceImpl.updateDoctor(
 		//paras.get("hidDoctorIdSave").toString(),		
 		paras.get("doctorId").toString(),
@@ -129,13 +129,15 @@ public class DoctorAPI extends HttpServlet {
 		paras.get("specialization").toString(),
 		paras.get("phone").toString(),
 		paras.get("email").toString(),
-		(int)paras.get("doctorCharges"),
+		paras.get("doctorCharges").toString(),
 		paras.get("password").toString(),
 		paras.get("confirmPassword").toString());
 		
-		//String output = doctorServiceImpl.updateDoctor(paras);
+		//String output12 = doctorServiceImpl.updateDoctor(paras);
 		response.getWriter().write(output);
-		
+		}catch(Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	/**

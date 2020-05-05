@@ -1,3 +1,4 @@
+<%@page import="com.caremarque.doctor.util.CommonUtils"%>
 <%@page import= "com.caremarque.doctor.service.DoctorServiceImpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -58,7 +59,7 @@
 <meta charset="ISO-8859-1">
 <title>Doctor Management</title>
 
-<link rel="stylesheet" href="Views/css/bootstrap.min.css">
+<link rel="stylesheet" href="Views/bootstrap.min.css">
 <script src="Components/jquery-3.5.0.min.js"></script>
 <script src="Components/doctor.js"></script>
 
@@ -70,10 +71,11 @@
 <div class="col-6">
 	<h1>Doctor Management..</h1>
 	
-	<form id="formDoctor" name="formDoctor">
+	<!-- <form id="formDoctor" name="formDoctor">   -->
+		<form id="formDoctor" name="formDoctor" method="POST" action="doctor.jsp">
 		
-		Doctor ID:
-		<input id="doctorId" name="doctorId" type="text" class="form-control form-control-sm">
+		<!--Doctor ID:  -->
+		<input id="doctorId" name="doctorId" type="hidden" class="form-control form-control-sm" value="10">
 		
 		<br>First Name:
 		<input id="firstName" name="firstName" type="text" class="form-control form-control-sm">
@@ -97,7 +99,7 @@
 		<input id="email" name="email" type="text" class="form-control form-control-sm">
 		
 		<br> Doctor Charges:
-		<input id="doctorCharges" name="doctorCharges" type="text" class="form-control form-control-sm">
+		<input id="doctorCharges" name="doctorCharges" type="number" step="1" pattern="\d+"  class="form-control form-control-sm">
 		
 		<br> Password:
 		<input id="password" name="password" type="text" class="form-control form-control-sm">
@@ -108,6 +110,7 @@
 		<br>
 		<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary">
 		<input type="hidden" id="hidDoctorIDSave" name="hidDoctorIDSave" value="">
+		<input type="hidden" id="Save" name="hidDoctorIDSave" value="">
 		
 	</form>
 	

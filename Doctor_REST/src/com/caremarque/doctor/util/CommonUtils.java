@@ -21,9 +21,10 @@ package com.caremarque.doctor.util;
 				id = Constants.DOCTOR_ID_PREFIX + next;
 				if(arrayList.contains(id)) {
 					next++;
-					id = Constants.DOCTOR_ID_PREFIX + next;
+					id = Constants.DOCTOR_ID_PREFIX + next+20;
 				}
 				return id;
+			
 			}
 
 

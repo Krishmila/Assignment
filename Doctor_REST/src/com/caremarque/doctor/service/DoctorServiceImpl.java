@@ -1,6 +1,7 @@
 package com.caremarque.doctor.service;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,9 +17,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//import org.apache.jasper.compiler.Node.DoBodyAction;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -80,7 +83,7 @@ public class DoctorServiceImpl implements IDoctorService {
 					preparedStatement.setString(Constants.COLUMN_INDEX_SIX, doctor.getSpecialization());
 					preparedStatement.setString(Constants.COLUMN_INDEX_SEVEN, doctor.getPhone());
 					preparedStatement.setString(Constants.COLUMN_INDEX_EIGHT, doctor.getEmail());
-					preparedStatement.setInt(Constants.COLUMN_INDEX_NINE, doctor.getDoctorCharges());
+					preparedStatement.setDouble(Constants.COLUMN_INDEX_NINE, doctor.getDoctorCharges());
 					preparedStatement.setString(Constants.COLUMN_INDEX_TEN, doctor.getPassword());
 					preparedStatement.setString(Constants.COLUMN_INDEX_ELEVEN, doctor.getConfirmPassword());
 					
@@ -283,7 +286,7 @@ public class DoctorServiceImpl implements IDoctorService {
 					String specialization = rs.getString("specialization");
 					String phone = rs.getString("phone");
 					String email = rs.getString("email");
-					int doctorCharges = rs.getInt("doctorCharges");
+					double doctorCharges = rs.getDouble("doctorCharges");
 					String password = rs.getString("password");
 					String confirmPassword = rs.getString("confirmPassword");
 					//type='hidden'
@@ -301,7 +304,7 @@ public class DoctorServiceImpl implements IDoctorService {
 					output += "<td>" + password + "</td>";
 					output += "<td>" + confirmPassword + "</td>";
 					
-					output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
+					output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'data-doctorid'></td>"
 							+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger'data-doctorid='"
 							+ doctorId + "'>" + "</td></tr>";
 				}
@@ -342,22 +345,25 @@ public class DoctorServiceImpl implements IDoctorService {
 	
 		//implementation of updateDoctor method..
 		
-		@Override
+		
 		//public String updateDoctor(String doctorId,Doctor doctor) {
-			public String updateDoctor(String doctorId,String firstName,String lastName,String regNo,String gender,String specialization,String phone,String email,int doctorCharges,String password,String confirmPassword) {
-			
+		@Override	
+		public String updateDoctor(String doctorId,String firstName,String lastName,String regNo,String gender,String specialization,String phone,String email,String doctorCharges,String password,String confirmPassword) {
+		
+		
 			String output = "";
 			Connection con = null;
 			PreparedStatement preparedStatement = null;
 			
 			try {
+				Double carge=Double.parseDouble(doctorCharges);
 				
 				con = DBConnection.getDBConnection();
 				String query = "UPDATE doctor SET doctorId=?,firstName=?, lastName=?, regNo=?, gender=?, specialization=?, phone=?, email=?, doctorCharges=?, password=?, confirmPassword=? WHERE doctorId=?";
 				
 				preparedStatement = con.prepareStatement(query);
 				
-				//preparedStatement.setString(Constants.COLUMN_INDEX_ONE, doctorId);
+				preparedStatement.setString(Constants.COLUMN_INDEX_ONE, doctorId );
 				preparedStatement.setString(Constants.COLUMN_INDEX_TWO, firstName);
 				preparedStatement.setString(Constants.COLUMN_INDEX_THREE, lastName);
 				preparedStatement.setString(Constants.COLUMN_INDEX_FOUR, regNo);
@@ -365,7 +371,7 @@ public class DoctorServiceImpl implements IDoctorService {
 				preparedStatement.setString(Constants.COLUMN_INDEX_SIX, specialization);
 				preparedStatement.setString(Constants.COLUMN_INDEX_SEVEN, phone);
 				preparedStatement.setString(Constants.COLUMN_INDEX_EIGHT, email);
-				preparedStatement.setInt(Constants.COLUMN_INDEX_NINE, doctorCharges);
+				preparedStatement.setDouble(Constants.COLUMN_INDEX_NINE, carge);
 				preparedStatement.setString(Constants.COLUMN_INDEX_TEN, password);
 				preparedStatement.setString(Constants.COLUMN_INDEX_ELEVEN, confirmPassword);
 				preparedStatement.setString(Constants.COLUMN_INDEX_TWELVE, doctorId);
@@ -404,8 +410,7 @@ public class DoctorServiceImpl implements IDoctorService {
 				
 				//new code
 				String newDoctor = getDoctors();
-				output = "{\"status\":\"success\", \"data\": \"" +
-						newDoctor + "\"}";
+				output = "{\"status\":\"success\", \"data\": \"" + newDoctor + "\"}";
 				
 				
 			}catch(Exception e) {
@@ -429,7 +434,7 @@ public class DoctorServiceImpl implements IDoctorService {
 					}catch(Exception e) {
 						
 					e.printStackTrace();
-					
+					log.log(Level.SEVERE, e.getMessage());
 						}
 					}
 			
