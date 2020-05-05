@@ -1,0 +1,7 @@
+ DB_DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
+ DB_USERNAME = "root";
+ DB_PASSWORD = "1234";
+
+CREATE SCHEMA  'healthcare' ;
+create table doctor(doctorId varchar(10) primary key,firstName varchar(30),lastName varchar(30),regNo varchar(10),gender varchar(10),specialization varchar(50),phone varchar(10),email varchar(30),doctorCharges double,password varchar(10),confirmPassword varchar(10)) 
+
