@@ -43,19 +43,11 @@ public class DoctorServiceImpl implements IDoctorService {
 			Connection con = null;
 			PreparedStatement preparedStatement = null;
 			
-			
-			// Here we call the generatePatientIDs method to auto generate a patientId
-			
-			//String doctorId = CommonUtils.generateDoctorIDs(getDoctorIDs());
 			System.out.println("Doctor Charges: " +  doctor.getDoctorCharges());
 			
-		
 				try {
-					
 					con = DBConnection.getDBConnection();
 					
-					/*String query = "INSERT INTO doctor('doctorId','firstName','lastName','regNo','gender','specialization','phone','email','doctorCharges','password','confirmPassword')"
-							+"VALUES(?,?,?,?,?,?,?,?,?,?,?)";*/
 					String query = "INSERT INTO doctor("
 							+"doctorId,"
 							+"firstName,"
@@ -72,7 +64,6 @@ public class DoctorServiceImpl implements IDoctorService {
 					
 					preparedStatement = con.prepareStatement(query);
 					
-					//doctor.setDoctorId(doctorId);
 					preparedStatement.setString(Constants.COLUMN_INDEX_ONE, doctor.getDoctorId());
 					preparedStatement.setString(Constants.COLUMN_INDEX_TWO, doctor.getFirstName());
 					preparedStatement.setString(Constants.COLUMN_INDEX_THREE, doctor.getLastName());
@@ -86,16 +77,13 @@ public class DoctorServiceImpl implements IDoctorService {
 					preparedStatement.setString(Constants.COLUMN_INDEX_ELEVEN, doctor.getConfirmPassword());
 					
 					preparedStatement.executeUpdate();
-					//output = "Inserted Successfully...!";
+					
 					String newDoctor = getDoctors();
 					output = "{\"status\":\"success\", \"data\": \"" + newDoctor + "\"}";
 					System.out.println("inside data base");
 				
-				 }catch (Exception e) {
-					
-					//output = "Error when Inserting the Doctor...!";
-					 
-					 output = "{\"status\":\"error\", \"data\": \"Error while inserting doctor details.\"}";
+				 }catch (Exception e) { 
+					output = "{\"status\":\"error\", \"data\": \"Error while inserting doctor details.\"}";
 					System.err.println(e.getMessage());
 					log.log(Level.SEVERE, e.getMessage());
 					
@@ -258,9 +246,6 @@ public class DoctorServiceImpl implements IDoctorService {
 				
 				
 			}catch(Exception e) {
-				
-							//output = "Error while updating the doctor..!";
-							
 							output = "{\"status\":\"error\", \"data\": \"Error while updating doctor details.\"}";
 							System.out.println(e.getMessage());
 							log.log(Level.SEVERE, e.getMessage());
@@ -285,8 +270,6 @@ public class DoctorServiceImpl implements IDoctorService {
 			return output;
 		}
 
-		
-		
 		//implementation of cancelDoctor method
 
 		@Override
@@ -308,13 +291,10 @@ public class DoctorServiceImpl implements IDoctorService {
 				System.out.println("inside delete"+doctorId);
 				preparedStatmnt.execute();
 				
-					//output = "Deleted successfully..!";
 				String newDoctor = getDoctors();
 				output = "{\"status\":\"success\", \"data\": \"" + newDoctor + "\"}";
 
 			}catch(Exception e) {
-				
-				//output = "Error while deleting item..!";
 				
 				output = "{\"status\":\"error\", \"data\": \"Error while deleting the item.\"}";
 				System.out.println(e.getMessage());

@@ -21,7 +21,6 @@
 <div class="container">
 
 	
-	<!-- <form id="formDoctor" name="formDoctor">   -->
 		<form id="formDoctor" name="formDoctor" method="POST" action="doctor.jsp">
 		
 		<div class="form-title"> Doctor Registration</div>

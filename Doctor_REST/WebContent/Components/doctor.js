@@ -31,13 +31,10 @@ $(document).on("click", "#btnSave", function(event)
 			return;
 		}
 		
-	// If valid------------------------
-		//$("#formDoctor").submit();
-		
-		//If valid
+	
+	//If valid
 		var check=$("#Save").val() == "";
 		var type = (check) ? "POST" : "PUT";
-		//var type = ($("#hidDoctorIdSave").val() == "") ? "POST" : "PUT";
 		
 		$.ajax(
 		{
@@ -58,8 +55,6 @@ $(document).on("click", "#btnSave", function(event)
 
 function onDoctorSaveComplete(response, status)
 {
-	//$("check").text("check save.");
-	//$("check").show();
 	
 	if (status == "success"){
 		
@@ -68,23 +63,7 @@ function onDoctorSaveComplete(response, status)
 		$("#alertSuccess").show();
 		
 		setTimeout(window.location.reload(true), 1500000);
-		/*if (resultSet.status.trim() == "success"){
-			
-			$("#alertSuccess").text("Successfully saved.");
-			$("#alertSuccess").show();
-			$("#divDoctorsGrid").html(resultSet.data);
-			
-			
-			//$("#hidPaymentIDSave").val("");
-			//$("#formItem")[0].reset();
-			//$("#hidPaymentIDSave2").val("");
-			//$("#formItem2")[0].reset();
-			
-		} else if (resultSet.status.trim() == "error"){
-			
-			$("#alertError").text(resultSet.data);
-			$("#alertError").show();
-		}*/
+		
 	} else if (status == "error"){
 		
 		$("#alertError").text("Error while saving.");
@@ -139,18 +118,6 @@ function onDoctorDeleteComplete(response, status){
 		$("#alertSuccess").text("Successfully deleted.");
 		$("#alertSuccess").show();
 		setTimeout(window.location.reload(true), 9000000);
-		
-		/*if (resultSet.status.trim() == "success")
-		{
-			$("#alertSuccess").text("Successfully deleted.");
-			$("#alertSuccess").show();
-			
-			$("#divDoctorsGrid").html(resultSet.data);
-		} else if (resultSet.status.trim() == "error")
-		{
-			$("#alertError").text(resultSet.data);
-			$("#alertError").show();
-		}*/
 		
 	} else if (status == "error")
 	{

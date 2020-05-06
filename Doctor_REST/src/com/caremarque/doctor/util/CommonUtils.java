@@ -1,16 +1,12 @@
 package com.caremarque.doctor.util;
 
-
-	
-	import java.util.ArrayList;
-
-	//import com.caremarque.appointment.utils.Constants;
+import java.util.ArrayList;
 
 	public class CommonUtils {
 		//TODO: Here we can implement some common functions used in though out the project 
 		
 				//*************************Doctor ID Generator*************************
-				//It takes the all the values from the payment table and get the count then increase the count by 1
+				//It takes the all the values from the doctor table and get the count then increase the count by 1
 				//and create next id with the given prefix
 			
 			public static String generateDoctorIDs(ArrayList<String> arrayList) {
