@@ -59,7 +59,15 @@
 		<div class="row">
 				<div class="col">
 					<label>Gender<label_1>*</label_1></label><br/>
-					<input id="gender" name="gender" type="text" class="form-control form-control-sm"><br/>
+					<!--  <input id="gender" name="gender" type="text" class="form-control form-control-sm"><br/>  -->
+					
+					 <select
+						name="gender" id="gender" class="form-control form-control-sm">
+						<option value="0">Select Gender</option>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
+					</select><br />
+				
 				</div>
 		</div>		
 		
