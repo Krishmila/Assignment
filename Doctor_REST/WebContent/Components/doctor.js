@@ -62,7 +62,7 @@ function onDoctorSaveComplete(response, status)
 		
 		$("#alertSuccess").show();
 		
-		setTimeout(window.location.reload(true), 1500000);
+		setTimeout(window.location.reload(true), 95000000);
 		
 	} else if (status == "error"){
 		
@@ -117,7 +117,7 @@ function onDoctorDeleteComplete(response, status){
 	{
 		$("#alertSuccess").text("Successfully deleted.");
 		$("#alertSuccess").show();
-		setTimeout(window.location.reload(true), 9000000);
+		setTimeout(window.location.reload(true), 95000000);
 		
 	} else if (status == "error")
 	{
