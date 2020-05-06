@@ -3,56 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-    <%--   
-    <%
-  //Save---------------------------------
-    if (request.getParameter("doctorId") != null)
-    {
-    	Doctor doctorObj = new Doctor();
-    String stsMsg = "";
-    //Insert--------------------------
-    if (request.getParameter("hidItemIDSave") == "")
-    {
-    stsMsg = doctorObj.createDoctor(request.getParameter("doctorId"),
-    request.getParameter("firstName"),
-    request.getParameter("lastName"),
-    request.getParameter("regNo"),
-    request.getParameter("gender"),
-    request.getParameter("specialization"),
-    request.getParameter("phone"),
-    request.getParameter("email"),
-    request.getParameter("doctorCharges"),
-    request.getParameter("password"),
-    request.getParameter("confirmPassword"));
-    }
-    else//Update----------------------
-    {
-    stsMsg = doctorObj.updateDoctor(request.getParameter("hidDoctorIDSave"),
-    			request.getParameter("doctorId"),
-    			request.getParameter("firstName"),
-    		    request.getParameter("lastName"),
-    		    request.getParameter("regNo"),
-    		    request.getParameter("gender"),
-    		    request.getParameter("specialization"),
-    		    request.getParameter("phone"),
-    		    request.getParameter("email"),
-    		    request.getParameter("doctorCharges"),
-    		    request.getParameter("password"),
-    		    request.getParameter("confirmPassword"));
-    }
-    session.setAttribute("statusMsg", stsMsg);
-    }
-    //Delete-----------------------------
-    if (request.getParameter("hidDoctorIDDelete") != null)
-    {
-    	Doctor doctorObj = new Doctor();
-    String stsMsg =
-    		doctorObj.deleteDoctor(request.getParameter("hidDcotorIDDelete"));
-    session.setAttribute("statusMsg", stsMsg);
-    }
     
-    %> 
-    --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,6 +11,7 @@
 <title>Doctor Management</title>
 
 <link rel="stylesheet" href="Views/bootstrap.min.css">
+<link rel="stylesheet" href="Views/doctor.css">
 <script src="Components/jquery-3.5.0.min.js"></script>
 <script src="Components/doctor.js"></script>
 
@@ -67,55 +19,103 @@
 <body>
 
 <div class="container">
-<div class="row">
-<div class="col-6">
-	<h1>Doctor Management..</h1>
+
 	
 	<!-- <form id="formDoctor" name="formDoctor">   -->
 		<form id="formDoctor" name="formDoctor" method="POST" action="doctor.jsp">
 		
-		<!--Doctor ID:  -->
-		<input id="doctorId" name="doctorId" type="hidden" class="form-control form-control-sm" value="10">
+		<div class="form-title"> Doctor Registration</div>
+		<br/><br/>
+		<h4>Add Doctor Details</h4>
 		
-		<br>First Name:
-		<input id="firstName" name="firstName" type="text" class="form-control form-control-sm">
 		
-		<br> Last Name:
-		<input id="lastName" name="lastName" type="text" class="form-control form-control-sm">
+					<!--Doctor ID:  -->
+					<!--  <label>Doctor ID <label_1>*</label_1></label><br /> -->
+					<input id="doctorId" name="doctorId" type="hidden" class="form-control form-control-sm" value="10">
+			
+			
+		<div class="row">		
+			<div class="col">
+					<label>First Name<label_1>*</label_1></label><br/>
+					<input id="firstName" name="firstName" type="text" class="form-control form-control-sm"><br/>
+			</div>
+		</div>	
 		
-		<br> Registration Number:
-		<input id="regNo" name="regNo" type="text" class="form-control form-control-sm">
+			<div class="row">
+				<div class="col">	
+					<label>Last Name<label_1>*</label_1></label><br/>
+					<input id="lastName" name="lastName" type="text" class="form-control form-control-sm"><br/>
+				</div>
+			</div>	
 		
-		<br> Gender:
-		<input id="gender" name="gender" type="text" class="form-control form-control-sm">
 		
-		<br> Specialization:
-		<input id="specialization" name="specialization" type="text" class="form-control form-control-sm">
+		<div class="row">
+				<div class="col">
+					<label>Registration Number<label_1>*</label_1></label><br/>
+					<input id="regNo" name="regNo" type="text" class="form-control form-control-sm"><br/>
+				</div>
+			</div>	
 		
-		<br> Phone:
-		<input id="phone" name="phone" type="text" class="form-control form-control-sm">
+		<div class="row">
+				<div class="col">
+					<label>Gender<label_1>*</label_1></label><br/>
+					<input id="gender" name="gender" type="text" class="form-control form-control-sm"><br/>
+				</div>
+		</div>		
 		
-		<br> Email:
-		<input id="email" name="email" type="text" class="form-control form-control-sm">
+		<div class="row">
+				<div class="col">
+					<label>Specialization<label_1>*</label_1></label><br/>
+					<input id="specialization" name="specialization" type="text" class="form-control form-control-sm"><br/>
+				</div>
+		</div>
 		
-		<br> Doctor Charges:
-		<input id="doctorCharges" name="doctorCharges" type="number" step="1" pattern="\d+"  class="form-control form-control-sm">
+		<div class="row">
+				<div class="col">		
+					<label> Phone<label_1>*</label_1></label><br/>
+					<input id="phone" name="phone" type="text" class="form-control form-control-sm"><br/>
+				</div>
+		</div>
 		
-		<br> Password:
-		<input id="password" name="password" type="text" class="form-control form-control-sm">
+			
+		<div class="row">
+				<div class="col">			
+					<label> Email<label_1>*</label_1></label><br/>
+					<input id="email" name="email" type="text" class="form-control form-control-sm"><br/>
+				</div>
+		</div>		
 		
-		<br> Confirm Password:
-		<input id="confirmPassword" name="confirmPassword" type="text" class="form-control form-control-sm">
+		<div class="row">
+				<div class="col">	
+					<label>Doctor Charges<label_1>*</label_1></label><br/>
+					<input id="doctorCharges" name="doctorCharges" type="number" step="1" pattern="\d+"  class="form-control form-control-sm"><br/>
+				</div>
+		</div>		
+		
+		<div class="row">
+				<div class="col">	
+					<label>Password<label_1>*</label_1></label><br/>
+					<input id="password" name="password" type="text" class="form-control form-control-sm"><br/>
+				</div>
+		</div>		
+		
+		<div class="row">
+				<div class="col">	
+					<label>Confirm Password<label_1>*</label_1></label><br/>
+					<input id="confirmPassword" name="confirmPassword" type="text" class="form-control form-control-sm"><br/>
+				</div>
+		</div>		
 		
 		<br>
 		<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary">
 		<input type="hidden" id="hidDoctorIDSave" name="hidDoctorIDSave" value="">
-		<input type="hidden" id="Save" name="hidDoctorIDSave" value="">
+		<input type="hidden" id="Save" name="hidDoctorIDSave" value=""> <br><br>
 		
-	</form>
+	
 	
 		<div id="alertSuccess" class="alert alert-success"></div>
 		<div id="alertError" class="alert alert-danger"></div>
+		</form>
 		
 		<br>
 		<div id="divDoctorsGrid">
@@ -127,7 +127,9 @@
 		
 		
 
-</div></div></div>
+</div>
+
+
 
 </body>
 </html>
