@@ -110,7 +110,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		}
 		
 		
-		//implementation of getDoctors method
+	//implementation of getDoctors method
 		
 		@Override
 		public String getDoctors() {

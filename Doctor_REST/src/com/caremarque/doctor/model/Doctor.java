@@ -3,7 +3,6 @@ package com.caremarque.doctor.model;
 public class Doctor
 
 {
-
 	private String doctorId;
 	private String firstName;
 	private String lastName;
