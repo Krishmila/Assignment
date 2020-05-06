@@ -48,6 +48,7 @@ $(document).on("click", "#btnSave", function(event)
 			complete : function(response, status)
 			{
 				onDoctorSaveComplete(response.responseText, status);
+				
 			}
 		});
 		$("#hidDoctorIDSave").val("");
@@ -57,22 +58,33 @@ $(document).on("click", "#btnSave", function(event)
 
 function onDoctorSaveComplete(response, status)
 {
+	//$("check").text("check save.");
+	//$("check").show();
+	
 	if (status == "success"){
 		
-		var resultSet = JSON.parse(response);
+		$("#alertSuccess").text("Successfully saved.");
 		
-		if (resultSet.status.trim() == "success"){
+		$("#alertSuccess").show();
+		
+		setTimeout(window.location.reload(true), 1500000);
+		/*if (resultSet.status.trim() == "success"){
 			
 			$("#alertSuccess").text("Successfully saved.");
 			$("#alertSuccess").show();
-
 			$("#divDoctorsGrid").html(resultSet.data);
+			
+			
+			//$("#hidPaymentIDSave").val("");
+			//$("#formItem")[0].reset();
+			//$("#hidPaymentIDSave2").val("");
+			//$("#formItem2")[0].reset();
 			
 		} else if (resultSet.status.trim() == "error"){
 			
 			$("#alertError").text(resultSet.data);
 			$("#alertError").show();
-		}
+		}*/
 	} else if (status == "error"){
 		
 		$("#alertError").text("Error while saving.");
@@ -124,9 +136,11 @@ function onDoctorDeleteComplete(response, status){
 	
 	if (status == "success")
 	{
-		var resultSet = JSON.parse(response);
+		$("#alertSuccess").text("Successfully deleted.");
+		$("#alertSuccess").show();
+		setTimeout(window.location.reload(true), 9000000);
 		
-		if (resultSet.status.trim() == "success")
+		/*if (resultSet.status.trim() == "success")
 		{
 			$("#alertSuccess").text("Successfully deleted.");
 			$("#alertSuccess").show();
@@ -136,7 +150,7 @@ function onDoctorDeleteComplete(response, status){
 		{
 			$("#alertError").text(resultSet.data);
 			$("#alertError").show();
-		}
+		}*/
 		
 	} else if (status == "error")
 	{
@@ -159,10 +173,21 @@ function validateDoctorForm()
 	{
 		return "Insert First Name.";
 	}
+	var letterReg1 = /^[A-Za-z]+$/;
+	var tmpfName =  $("#firstName").val().trim();
+	if(!tmpfName.match(letterReg1)){
+		return "First Name must have alphabet charaters only...!";
+	}
+	
 	// LASTNAME
 	if ($("#lastName").val().trim() == "")
 	{
 		return "Insert Last Name.";
+	}
+	var letterReg2 = /^[A-Za-z]+$/;
+	var tmplName =  $("#lastName").val().trim();
+	if(!tmplName.match(letterReg2)){
+		return "Last Name must have alphabet charaters only...!";
 	}
 	//REGISTRATION NUMBER-------------------------------
 	if ($("#regNo").val().trim() == "")
@@ -170,9 +195,9 @@ function validateDoctorForm()
 		return "Insert Registration Number.";
 	}
 	//GENDER
-	if ($("#gender").val().trim() == "")
+	if ($("#gender").val().trim() == "0")
 	{
-		return "Insert Gender.";
+		return "Select Gender.";
 	}
 	//SPECIALIZATION
 	if ($("#specialization").val().trim() == "")
@@ -184,11 +209,23 @@ function validateDoctorForm()
 	{
 		return "Insert Phone Number.";
 	}
+	var contactReg = /^\d{10}$/;
+	var tmpPhone =  $("#phone").val().trim();
+	if(!tmpPhone.match(contactReg)){
+		return "Insert a valid Phone Number...!";
+	}
 	//EMAIL
 	if ($("#email").val().trim() == "")
 	{
 		return "Insert Email Address.";
 	}
+	
+	var emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	var tmpEmail =  $("#email").val().trim();
+	if(!tmpEmail.match(emailReg)){
+		return "Insert a valid Email...!";
+	}
+	
 	//DOCTOR CHARGES
 	if ($("#doctorCharges").val().trim() == "")
 	{
@@ -208,10 +245,22 @@ function validateDoctorForm()
 	{
 		return "Insert Password.";
 	}
+	
+	var pwdReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,10}$/;
+	var tmpPwd =  $("#password").val().trim();
+	if(!tmpPwd.match(pwdReg)){
+		return "Insert a Password 4 to 10 characters which contain at least one numeric digit, one uppercase and one lowercase letter...!";
+	}
 	//CONFIRM PASSWORD
 	if ($("#confirmPassword").val().trim() == "")
 	{
 		return "Insert to Confirm Password.";
 	}
+	
+	var tmpCpwd = $("#confirmPassword").val().trim();
+	if(tmpCpwd != tmpPwd){
+		return "Passwords are mismatching...!";
+	}
+	
 return true;
 }
