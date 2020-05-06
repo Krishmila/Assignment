@@ -1,5 +1,5 @@
 package com.caremarque.doctor.model;
-//model
+
 public class Doctor
 
 {
@@ -18,7 +18,7 @@ public class Doctor
 	private String type;
 
 	public Doctor() {
-		// TODO Auto-generated constructor stub
+		
 		super();
 	}
 

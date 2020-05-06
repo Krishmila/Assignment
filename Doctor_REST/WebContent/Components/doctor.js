@@ -9,6 +9,8 @@ $(document).ready(function()
 		$("#alertSuccess").hide();
 	}
 	$("#alertError").hide();
+	
+	
 });
 
 //SAVE ============================================
@@ -89,7 +91,6 @@ $(document).on("click", ".btnUpdate", function(event)
 		$("#Save").val("PUT");
 		$("#hidDoctorIdSave").val($(this).closest("tr").find('#hidDoctorIDUpdate').val());
 		$("#doctorId").val($(this).closest("tr").find('#hidDoctorIDUpdate').val());
-		//$("#doctorId").val($(this).closest("tr").find('td:eq(0)').text());
 		$("#firstName").val($(this).closest("tr").find('td:eq(1)').text());
 		$("#lastName").val($(this).closest("tr").find('td:eq(2)').text());
 		$("#regNo").val($(this).closest("tr").find('td:eq(3)').text());
@@ -201,6 +202,7 @@ function validateDoctorForm()
 	}
 	// convert to decimal price
 	$("#doctorCharges").val(parseFloat(tmpCharges).toFixed(2));
+	
 	// PASSWORD
 	if ($("#password").val().trim() == "")
 	{
