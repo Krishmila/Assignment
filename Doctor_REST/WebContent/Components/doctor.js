@@ -156,22 +156,22 @@ function validateDoctorForm()
 	if(!tmplName.match(letterReg2)){
 		return "Last Name must have alphabet charaters only...!";
 	}
-	//REGISTRATION NUMBER-------------------------------
+	//REGISTRATION NUMBER..
 	if ($("#regNo").val().trim() == "")
 	{
 		return "Insert Registration Number.";
 	}
-	//GENDER
+	//GENDER...
 	if ($("#gender").val().trim() == "0")
 	{
 		return "Select Gender.";
 	}
-	//SPECIALIZATION
+	//SPECIALIZATION..
 	if ($("#specialization").val().trim() == "")
 	{
 		return "Insert Specialization.";
 	}
-	//PHONE
+	//PHONE..
 	if ($("#phone").val().trim() == "")
 	{
 		return "Insert Phone Number.";
